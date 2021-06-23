@@ -1,2 +1,0 @@
-# TSSR - Formation
-# Cours
