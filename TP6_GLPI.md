@@ -749,7 +749,9 @@ cp -r fusioninventory/ /var/www/html/plugins/
 * Et on répète l'action sur des VM agents sous W10 créées pour l'occasion (192.168.0.41 et 192.162.0.42, avec en passerelle/dns notre WServer 192.168.0.33)
 -> via le partage de dossier en lance FIAgent et on pousse des remontées
 
-![Tableau de bord du GLPI local avec l'import utilisateurs et Matériel](https://raw.githubusercontent.com/RaspCric/D-Documents-5---GitHub-/images/tableau%20de%20bord%20glpi.png)
+![Import via FusionInventory](https://github.com/RaspCric/D-Documents-5---GitHub-/raw/images/import%203%20agents.png)
+
+![Tableau de bord du GLPI local avec les imports](https://raw.githubusercontent.com/RaspCric/D-Documents-5---GitHub-/images/tableau%20de%20bord%20glpi.png)
 
 
 
