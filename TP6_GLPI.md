@@ -702,6 +702,9 @@ Ainsi, le server GLPI qui est hébergé sur notre VM debian résout sa recherche
 **Ressources web :**
 * [Gestion générale de GLPI](https://neptunet.fr/glpi/)
 * [Cours OpenClassroom sur FusionInventoy](https://openclassrooms.com/fr/courses/1730516-gerez-votre-parc-informatique-avec-glpi/5994176-installez-le-plugin-et-l-agent-fusioninventory)
+* [Liste des PLugins dispo](https://plugins.glpi-project.org/#/)
+
+Pour installer un plugin dans GLPI, il suffit de télécharger son archive puis de l'extraire dans le dossier .../glpi/plugins, et de les installer via l'interface de GLPI. Ensuite, dans l'interface GLPI, aller sous Configuration > Plugins cliquez sur Installer puis Activer. À noter qu'un plugin peut disposer de plusieurs versions, chaque version est la plupart du temps spécifique à une version précise de GLPI
 
 1. [DataInjection](https://neptunet.fr/glpi-data-injection/)
 
@@ -759,9 +762,7 @@ cp -r fusioninventory/ /var/www/html/plugins/
 
 
 
---> faire un inventaire
---> réaliser un inventaire
---> fournir un service poir une remontée d'inventaire
+
 --> jeudi helpdesk avec tickets
 --> vendredi itil
 --> au retour stage, Bureautique (tableau croisé auto... + modules365... + certification excel/bureautique)
