@@ -114,6 +114,7 @@ Cette partie permettra en outre de développer des outils afférents à l'admini
     5. [Gestion générale de GLPI : mise en pratique via FusionIventory](#IVE)
     6. [Gestion générale de GLPI : tickets](#IVF)
     7. [Gestion générale de GLPI : tickets et création d'un Helpdesk dans le cloud](#IVG)
+    8. [Création d'une FAQ](#IVH)
 
 5. [Annexe : lexique](#lexique)
 
@@ -983,9 +984,9 @@ Ensuite on organise l'assistance à distance.
 
 
 
+#### H) Création d'une FAQ <a name="IVH"></a>
 
-
-
+* GLPI / Base de connaissance
 
 
 
