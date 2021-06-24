@@ -797,7 +797,7 @@ Ainsi, le server GLPI qui est hébergé sur notre VM debian résout sa recherche
 ![liste d'intitulés](https://github.com/cromm24/Hello_World/blob/GLPI/intitul%C3%A9s.jpg?raw=true)
 
 
-#### D) Gestion générale de GLPI : plugins --- <a name="IVD"></a>
+#### D) Gestion générale de GLPI : plugins <a name="IVD"></a>
 
 **Ressources web :**
 * [Gestion générale de GLPI](https://neptunet.fr/glpi/)
@@ -869,7 +869,7 @@ Ensuite
 > `# /etc/init.d/cron restart`
 
 
-#### E) Gestion générale de GLPI : mise en pratique via FusionIventory--- <a name="IVE"></a>
+#### E) Gestion générale de GLPI : mise en pratique via FusionIventory <a name="IVE"></a>
 
 * Téléchargement de FusionInventory Agent via [GitHub](https://github.com/fusioninventory/fusioninventory-agent/releases/download/2.6/fusioninventory-agent_windows-x64_2.6.exe)  
 * On l'installe sur notre client
@@ -896,7 +896,8 @@ On peut ensuite faire un état des lieux de l'ensemble du parc (le gsm est recon
 
 ![Tableau de bord du GLPI local avec les imports](https://raw.githubusercontent.com/RaspCric/D-Documents-5---GitHub-/images/tableau%20de%20bord%20glpi.png)
 
-#### F) Gestion générale de GLPI : tickets et création d'un Helpdesk --- <a name="IVF"></a>
+
+#### F) Gestion générale de GLPI : tickets et création d'un Helpdesk <a name="IVF"></a>
 
 
 **Ressources Web**
@@ -951,13 +952,30 @@ Il est possible de voir l'ensemble des tickets dans l'interface GLPI.
 ![*](https://github.com/cromm24/Hello_World/blob/GLPI/tticket4michu.jpg)
 
 
-#### G) Gestion générale de GLPI : tickets et création d'un Helpdesk dans le cloud --- <a name="IVG"></a>
+#### G) Gestion générale de GLPI : tickets et création d'un Helpdesk dans le cloud <a name="IVG"></a>
 
 
+* Remplissage ddu GLPI commun (https://support.cefim.ninja)
+    -> rdelmas (admin)
+    -> glagaffe (noobuser)
+
+![Tableau récapitulatif](https://github.com/RaspCric/TSSR_Formation/blob/images/Exercice%20de%20groupe%20sur%20le%20cloud.jpg)
+
+- On créé les tickets en fonction des problèmes rencontrés
+- On attribue ensuite les tickets aux personnes dédiées
+
+![Mise à disposition des tickets](https://github.com/RaspCric/TSSR_Formation/blob/images/creation%20de%20deux%20tickets%20et%20attribuation%20%C3%A0%20charles.jpg)
+
+Ensuite on organise l'assistance à distance.
+
+1. **Ticket 1**
+
+![Echanges entre technicien et usager](https://github.com/RaspCric/TSSR_Formation/blob/images/ticket%20r%C3%A9solu.png)
+
+![L'usager confrme la réparation](https://github.com/RaspCric/TSSR_Formation/blob/images/ticket%20resolu.png)
 
 
-
-
+1. **Ticket 2**
 
 
 
