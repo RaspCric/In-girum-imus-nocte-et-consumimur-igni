@@ -624,11 +624,11 @@ Cela nous permet d'étoffer les informations liées aux USERS.
     -> Paramètre / Config ordi / Stratégies / Paramètres windows / Paramètres de sécurité / Stratégie de compte / stratégie de mdp <br/>
     -> changer les règles de mdp pour que les mdp générés via PIN (1234) soient acceptés
 
-[Accès aux Stratégies de groupes](https://github.com/cromm24/Hello_World/blob/GLPI/gestion_strat%C3%A9gies_groupes.jpg)
+![Accès aux Stratégies de groupes](https://github.com/cromm24/Hello_World/blob/GLPI/gestion_strat%C3%A9gies_groupes.jpg)
 
-[Baisse du niveau de sécurité des mdp via GPO](https://github.com/cromm24/Hello_World/blob/GLPI/restrictions_mdp.jpg)
+![Baisse du niveau de sécurité des mdp via GPO](https://github.com/cromm24/Hello_World/blob/GLPI/restrictions_mdp.jpg)
 
-[On force les modifications de la GPO](https://github.com/cromm24/Hello_World/blob/GLPI/update%20_force.jpg)
+![On force les modifications de la GPO](https://github.com/cromm24/Hello_World/blob/GLPI/update%20_force.jpg)
 
 #### --- Générer les users créés dans le GLPI via un script shell --- <a name="IIIB5"></a>
 
@@ -689,7 +689,7 @@ Ajouter un support glpi dans WServer2019 + une redirection DNS car il faut mettr
 
 Ainsi, nous mettons en lien via notre nom de domaine tssr.lan l'ip de notre server glpi via son adresse IP fixe.
 
-[Support glpi](https://github.com/cromm24/Hello_World/blob/GLPI/ajout_support_dns.jpg)
+![Support glpi](https://github.com/cromm24/Hello_World/blob/GLPI/ajout_support_dns.jpg)
 
 2. Sur la machine hôte faire pointer le DNS vers l'IP du WServeur (192.168.0.33) pour que ça fonctionne aussi sur la machine hôte
 
