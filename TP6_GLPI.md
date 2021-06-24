@@ -977,6 +977,9 @@ Ensuite on organise l'assistance à distance.
 
 1. **Ticket 2**
 
+![Echanges entre technicien et usager](https://github.com/RaspCric/TSSR_Formation/blob/images/tik2.png)
+
+![L'usager confrme la réparation](https://github.com/RaspCric/TSSR_Formation/blob/images/tik2b.png)
 
 
 
