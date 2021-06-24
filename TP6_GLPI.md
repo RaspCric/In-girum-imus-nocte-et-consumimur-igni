@@ -61,7 +61,9 @@ Cette partie permettra en outre de développer des outils afférents à l'admini
 * Gestion par binôme et dans le GLPI général des tickets
 * Dashboard
 
-![Shéma de l'Infra demandée](https://github.com/RaspCric/TSSR_Formation/blob/images/Capture%20d%25u2019e%CC%81cran%202021-06-24%20a%CC%80%2009.05.36.png)
+![Schéma de l'Infra demandée](https://github.com/RaspCric/TSSR_Formation/blob/images/Capture%20d%25u2019e%CC%81cran%202021-06-24%20a%CC%80%2009.05.36.png)
+
+![Schéma refait via ordi](https://github.com/RaspCric/TSSR_Formation/blob/images/SCHEMA_INFRA_GLPI.jpg)
 
 ---
 
@@ -106,11 +108,12 @@ Cette partie permettra en outre de développer des outils afférents à l'admini
     1. [Gestion des différents DNS](#IVA)
         1. [Modifications du DNS sur le WServer](#IVA1)
         2. [Modifications du DNS de réponse sur le serveur GLPI via VM Debian](#IVA2)
-    2. [Import des users via un annuaire LDAP sur l'interface GLPI](IVB)
-    3. [Configurer les intitulés](IVC)
-    4. [Gestion générale de GLPI : les plugins](IVD)
-    5. [Gestion générale de GLPI : mise en pratique via FusionIventory](IVE)
-    6. [Gestion générale de GLPI : tickets](IVF)
+    2. [Import des users via un annuaire LDAP sur l'interface GLPI](#IVB)
+    3. [Configurer les intitulés](#IVC)
+    4. [Gestion générale de GLPI : les plugins](#IVD)
+    5. [Gestion générale de GLPI : mise en pratique via FusionIventory](#IVE)
+    6. [Gestion générale de GLPI : tickets](#IVF)
+    7. [Gestion générale de GLPI : tickets et création d'un Helpdesk dans le cloud](#IVG)
 
 5. [Annexe : lexique](#lexique)
 
@@ -157,6 +160,8 @@ Grub : Oui il faut l'installer sinon notre linux sera comme les singes de la ver
 - Configuration de notre Baseline Server en mode CLI via le compte **root** :
 - La VM doit être mise en IP fixe pour pouvoir être approchée
 
+![IPA](https://github.com/RaspCric/TSSR_Formation/blob/images/ipa.jpg)
+
 #### --- Vérification des informations --- <a name="IB1"></a>
 
 > `ip a`<br/>
@@ -177,6 +182,8 @@ Grub : Oui il faut l'installer sinon notre linux sera comme les singes de la ver
 -> tous les dépôts où le debian va chercher les dl <br/>
 -> need vérifier que les dépôts sont ok
 
+![Checks des sources](https://github.com/RaspCric/TSSR_Formation/blob/images/sourceslist.jpg)
+
 #### -- Mises à jour du système --- <a name="IB2"></a>
 
 > `apt update`<br/>
@@ -192,7 +199,7 @@ Il s'agit d'éditer le fichier de préférence du shell via nano afin d'avoir un
 > `nano /.bashrc`<br/>
 -> change config du terminal ; on décohe les # dans la seconde partie, les 5 lignes commencent par export et juste avant les RM, (export, eval, alias ls, alias ll; alias l))<br/>
 
-[Fichier .bashrc](https://github.com/RaspCric/TSSR_Formation/blob/images/bashrc.png)
+![Fichier .bashrc](https://github.com/RaspCric/TSSR_Formation/blob/images/bashrc.png)
 
 > `exit`<br/>
 -> pour redémarrer session en ligne de commande
@@ -220,6 +227,11 @@ On lance l'installation des binaires :
 > `apt install winbind(linux pourra manipuler des netbios) samba(partage windows)`<br/>
 -> installation de la couche netbios (permet de dialoguer avec winsows)
 
+Pour vérifier les softs installés :
+> `dpkg -l`
+
+![Liste des softs](https://github.com/RaspCric/TSSR_Formation/blob/images/dpkg-l.jpg)
+
 #### --- Installation Webmin --- <a name="IB5"></a>
 
 * [Site officiel de Webmin](https://www.webmin.com/)
@@ -240,6 +252,8 @@ On lance l'installation des binaires :
 
 <br/>
 
+![Webmin](https://github.com/RaspCric/TSSR_Formation/blob/images/webmin.jpg)
+
 [https://ipvm:10000](https://192.168.0.32:10000/) (pour use webmin)
 -> il ne reste plus qu'à se connecter via le navigateur de votre hôte win10 sur votre serveur en mode web
 
@@ -256,13 +270,17 @@ On lance l'installation des binaires :
 > `/etc/nsswitch.conf`<br/>
 -> on rajoute wins après dns
 
-> `/etc/interfaces`<br/>
+![/ect](https://github.com/RaspCric/TSSR_Formation/blob/images/etc.jpg)
+
+> `/etc/network/interfaces`<br/>
 -> Mise en réseau du poste <br/>
 -> se mettre en ip fixe <br/>
 -> static (remplace dhcp par static) <br/>
 -> address 192.168.0.32 <br/>
 -> netmask 255.255.255.0 <br/>
 -> gateway 192.168.0.1 (passerelle par défaut, c'est le modem/routeur)
+
+![Interfaces](https://github.com/RaspCric/TSSR_Formation/blob/images/interfaces.jpg)
 
 ---
 
@@ -277,18 +295,19 @@ On lance l'installation des binaires :
 
 Il va s'agir d'installer un logiciel libre de gestion des services informatiques (ITSM) et de gestion des services d'assistance (issue tracking system et ServiceDesk). GLPI est une application web qui aide les entreprises à gérer leur système d’information. Parmi ses caractéristiques, cette solution est capable de construire un inventaire de toutes les ressources de la société et de réaliser la gestion des tâches administratives et financières. Les fonctionnalités de cette solution aident les Administrateurs IT à créer une base de données regroupant des ressources techniques et de gestion, ainsi qu’un historique des actions de maintenance. La fonctionnalité de gestion d'assistance ou helpdesk fournit aux utilisateurs un service leur permettant de signaler des incidents ou de créer des demandes basées sur un actif ou non, ceci par la création d'un ticket d’assistance.
 
-### A) Installation du GLPI <a name="IIA"></a>
+### A) Installation du GLPI (webApp) <a name="IIA"></a>
 
 > `apt update && apt upgrade -y`
 -> Mise à jour des paquets et installation des nouveautés sur le Système Debian
 
-#### --- Base de Données --- <a name="IIA1"></a>
+#### --- Base de Données de GLPI : MariaDB --- <a name="IIA1"></a>
 
 **Ressources web :**
 * [MariaDB via Wikipedia](https://fr.wikipedia.org/wiki/MariaDB)
 * [Infos MariaDB via doc-fedora](https://doc.fedora-fr.org/wiki/Installation_et_configuration_de_MariaDB)
 * [Infos MariaDB](https://www.mariadbtutorial.com/)
 * [Infos MariaDB via docs Ubuntu](https://doc.ubuntu-fr.org/mariadb)
+* [Tuto MariaDB](https://www.geek17.com/fr/content/debian-10-buster-installer-et-configurer-mariadb-107)
 
 Un système de gestion de base de données (abr. SGBD) est un logiciel système servant à stocker, à manipuler ou gérer, et à partager des données dans une base de données, en garantissant la qualité, la pérennité et la confidentialité des informations, tout en cachant la complexité des opérations.
 Un SGBD (en anglais DBMS pour database management system) permet d'inscrire, de retrouver, de modifier, de trier, de transformer ou d'imprimer les informations de la base de données. Il permet d'effectuer des comptes rendus des informations enregistrées et comporte des mécanismes pour assurer la cohérence des informations, éviter des pertes d'informations dues à des pannes, assurer la confidentialité et permettre son utilisation par d'autres logiciels1. Selon le modèle, le SGBD peut comporter une simple interface graphique jusqu'à des langages de programmation sophistiqués1. 
@@ -325,6 +344,8 @@ Un SGBD (en anglais DBMS pour database management system) permet d'inscrire, de 
 
 #### --- Serveur Apache --- <a name="IIA2"></a>
 
+Apache est conçu pour prendre en charge de nombreux modules lui donnant des fonctionnalités supplémentaires : interprétation du langage Perl, PHP, Python et Ruby, serveur proxy, Common Gateway Interface, Server Side Includes, réécriture d'URL, négociation de contenu, protocoles de communication additionnels, etc. Néanmoins, il est à noter que l'existence de nombreux modules Apache complexifie la configuration du serveur web. En effet, les bonnes pratiques recommandent de ne charger que les modules utiles : de nombreuses failles de sécurité affectant uniquement les modules d'Apache sont régulièrement découvertes. 
+
 * [Infos Apache via docs Ubuntu](https://doc.ubuntu-fr.org/apache2)
 * [Infos Apache via docs Ubunu2](https://guide.ubuntu-fr.org/server/httpd.html)
 
@@ -338,6 +359,7 @@ Options Indexes FollowSymLinks
 AllowOverride All
 Require all granted
 </Directory>
+
 
 ```
 
@@ -362,6 +384,8 @@ Require all granted
 
 > `chown -R www-data /var/www/html`<br/>
 -> Changement de propriétaire de manière récursive (autorisation pour apache) pour glpi (www-data)
+
+![Tableau de bord GLPI](https://github.com/RaspCric/TSSR_Formation/blob/images/glpi.jpg)
 
 <br/>
 
@@ -399,10 +423,14 @@ Ce procédé est très largement utilisé par les box internet (ou modem routeur
 -> A (Type) ; 10800 (TTL) ; 88.138.81.98 (IPv4)<br/>
 -> cela permet d'associer à notre IP publique un DNS spécifique pour être utilisé dans la barre de recherche du navigateur
 
+![Accès Gandi](https://github.com/RaspCric/TSSR_Formation/blob/images/gandi.jpg)
+
 3. Ensuite on va dans la BOX (192.168.0.1)<br/>
 -> Numericable / Réseau / Paramètres avancées /Transfert de ports<br/>
 -> GLPI (nom) ; TCP (port 80), IP locale du serveur<br/>
 -> On permet ainsi de lier notre IP locale de la VM à notre IP publique via l'ouverture du port TCP
+
+![Accès Box](https://github.com/RaspCric/TSSR_Formation/blob/images/transfertport.jpg)
 
 <br/>
 
@@ -715,6 +743,8 @@ Ajouter un support glpi dans WServer2019 + une redirection DNS car il faut mettr
 -> support_glpi + 192.168.0.32(adresse serveur glpi)<br/>
 -> http://support_glpi.tssr.lan (accès au support via une adresse http)<br/>
 
+![Support_glpi](https://github.com/RaspCric/TSSR_Formation/blob/images/support_glpi.png)
+
 Ainsi, nous mettons en lien via notre nom de domaine tssr.lan l'ip de notre server glpi via son adresse IP fixe.
 
 ![Support glpi](https://github.com/cromm24/Hello_World/blob/GLPI/ajout_support_dns.jpg)
@@ -853,7 +883,11 @@ Ensuite
 
 ![Voici ce que cela donne via l'interface GLPI](https://github.com/cromm24/Hello_World/blob/GLPI/Capture%20d%E2%80%99%C3%A9cran%202021-06-23%20155415.jpg?raw=true)
 
-Et on répète l'action sur des VM agents sous W10 créées pour l'occasion (192.168.0.41 et 192.162.0.42, avec en passerelle/dns notre WServer 192.168.0.33). On utilise le partage de dossier VMware pour lancer FIAgent et on pousse des remontées.
+Et on répète l'action sur des VM agents sous W10 créées pour l'occasion (192.168.0.41 et 192.162.0.42, avec en passerelle/dns notre WServer 192.168.0.33). 
+
+![Agent DC2](https://github.com/RaspCric/TSSR_Formation/blob/images/agentsw10.jpg)
+
+On utilise le partage de dossier VMware pour lancer FIAgent et on pousse des remontées.
 Idem avec le smartphone et l'application GLPI Agent.
 
 ![Import via FusionInventory](https://github.com/RaspCric/D-Documents-5---GitHub-/raw/images/import%203%20agents.png)
@@ -862,13 +896,23 @@ On peut ensuite faire un état des lieux de l'ensemble du parc (le gsm est recon
 
 ![Tableau de bord du GLPI local avec les imports](https://raw.githubusercontent.com/RaspCric/D-Documents-5---GitHub-/images/tableau%20de%20bord%20glpi.png)
 
-#### F) Gestion générale de GLPI : tickets --- <a name="IVF"></a>
+#### F) Gestion générale de GLPI : tickets et création d'un Helpdesk --- <a name="IVF"></a>
 
-* Création d'un ticket :  
+
+**Ressources Web**
+* [OpenClassroom](https://openclassrooms.com/fr/courses/1730486-gerez-vos-incidents-avec-le-referentiel-itil-sur-glpi/6544671-traitez-et-suivez-votre-ticket-dans-glpi)
+* [GLPI-Project](https://glpi-project.org/DOC/FR/glpi/helpdesk_openticket.html)
+* [HelpDesk ticket](https://glpi-project.org/DOC/FR/glpi/helpdesk_ticket.html)
+
+
+Le module d'assistance de GLPI est conforme au guide de bonnes pratiques ITIL pour la partie Gestion des incidents et gestion des demandes de services : il intègre donc des notions comme l'impact, l'urgence d'un ticket, la matrice de calcul des priorités associées et une normalisation des statuts. Bien que l'outil soit conforme ITIL, il n'y aucune obligation pour suivre ces bonnes pratiques : chacun est libre d'implémenter la gestion des incidents qui correspond le mieux à ses besoins.
+
+
+1. Création d'un ticket :  
 
 ![*](https://github.com/cromm24/Hello_World/blob/GLPI/creation_ticket.jpg?raw=true)
 
-* Deux exemples de résolutions de tickets :  
+2. Deux exemples de résolutions de tickets :  
 
 ![*](https://github.com/cromm24/Hello_World/blob/GLPI/r%C3%A9solution%20ticket.png?raw=true)  
 
@@ -878,6 +922,36 @@ Il est possible de voir l'ensemble des tickets dans l'interface GLPI.
 
 ![Récapitulatif des tickets](https://github.com/RaspCric/D-Documents-5---GitHub-/raw/images/tockets.png)
 
+3. Exemples de résolutions de tickets dans un contexte d'entreprise et avec une réelle perspective de résolution informatique
+
+![Accès au ticket](https://github.com/RaspCric/TSSR_Formation/raw/images/creer%20un%20tiket.jpg)
+
+![Demande en cours](https://github.com/RaspCric/TSSR_Formation/blob/images/r%C3%A9solution%20ticket%202.png.jpg)
+
+![Réponses aux question](https://github.com/RaspCric/TSSR_Formation/raw/images/ticketre%C3%A7u2.jpg)
+
+* Ticket Michie
+
+![*](https://github.com/cromm24/Hello_World/blob/GLPI/ticket1michie.jpg)
+
+![*](https://github.com/cromm24/Hello_World/blob/GLPI/ticket2michie.jpg)
+
+![*](https://github.com/cromm24/Hello_World/blob/GLPI/ticket3michie.jpg)
+
+![*](https://github.com/cromm24/Hello_World/blob/GLPI/ticket4michie.jpg)
+
+![*](https://github.com/cromm24/Hello_World/blob/GLPI/ticket5michie.jpg)
+
+* Ticket Michu
+
+![*](https://github.com/cromm24/Hello_World/blob/GLPI/ticket2michu.jpg)
+
+![*](https://github.com/cromm24/Hello_World/blob/GLPI/ticket3michu.jpg)
+
+![*](https://github.com/cromm24/Hello_World/blob/GLPI/tticket4michu.jpg)
+
+
+#### G) Gestion générale de GLPI : tickets et création d'un Helpdesk dans le cloud --- <a name="IVG"></a>
 
 
 
@@ -888,7 +962,20 @@ Il est possible de voir l'ensemble des tickets dans l'interface GLPI.
 
 
 
---> jeudi helpdesk avec tickets
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 --> vendredi itil
 --> au retour stage, Bureautique (tableau croisé auto... + modules365... + certification excel/bureautique)
 
