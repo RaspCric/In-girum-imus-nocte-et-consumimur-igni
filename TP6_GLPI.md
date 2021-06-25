@@ -128,14 +128,14 @@ Cette partie permettra en outre de développer des outils afférents à l'admini
 
 La préparation d'une baseline permettra d'avoir un outil master que l'on pourra utiliser en mode clonage  ; il s'agit donc de faire une install la plus propre et la plus à la carte possible
 
-::: warning
+
 **Ressources web :**
 1. [Site officiel Debian](https://www.debian.org/index.fr.html)
 2. [Tutoriel install Debian 10 via it-connect.fr](https://www.it-connect.fr/installation-debian-10-buster-pas-a-pas/)
 3. [Tutoriel install Debian 10 via lecrabeinfo.net](https://lecrabeinfo.net/installer-linux-debian-le-guide-complet.html)
 4. [Tutoriel install Debian 10 via malekal.com](https://www.malekal.com/installer-linux-debian/)
 5. [Tutoriel install Debian 10 minimal server](https://www.howtoforge.com/tutorial/debian-minimal-server/)
-::: 
+
 
 ### A) Installation d'un Derbian 10 vierge <a name="IA"></a>
 
@@ -238,11 +238,11 @@ Pour vérifier les softs installés :
 
 #### --- Installation Webmin --- <a name="IB5"></a>
 
-::: warning
+
 **Ressources web :** 
 * [Site officiel de Webmin](https://www.webmin.com/)
 * [Lien wikipedia](https://fr.wikipedia.org/wiki/Webmin)
-::: 
+ 
 
 > `wget http://prdownloads.sourceforge.net/webadmin/webmin_1.979_all.deb (wget=dl via le net)`<br/>
 1. Faire un clic droit sur le Debian Packiage dans la frame de gauche en haut et récupérer dans le presse papier l'adresse du paquet du genre
@@ -293,7 +293,7 @@ Pour vérifier les softs installés :
 
 ## **II. Installation et mise en marche de GLPI** <a name="II"></a>
 
-::: warning
+
 **Ressources web :**
 * [Site officiel de GLPI](https://glpi-project.org/fr/)
 * [Page Wikipedia](https://fr.wikipedia.org/wiki/Gestionnaire_Libre_de_Parc_Informatique)
@@ -301,7 +301,7 @@ Pour vérifier les softs installés :
 * [Projet GLPI sur GitHub](https://github.com/glpi-project/glpi)
 * [Tutoriel installation via le site rdr-it.com](https://rdr-it.com/glpi-installation-configuration-de-base/)
 * [Tutoriel installation Via le site Neptunet (à privilégier)](https://neptunet.fr/install-glpi/)
-:::
+
 
 Il va s'agir d'installer un logiciel libre de gestion des services informatiques (ITSM) et de gestion des services d'assistance (issue tracking system et ServiceDesk). GLPI est une application web qui aide les entreprises à gérer leur système d’information. Parmi ses caractéristiques, cette solution est capable de construire un inventaire de toutes les ressources de la société et de réaliser la gestion des tâches administratives et financières. Les fonctionnalités de cette solution aident les Administrateurs IT à créer une base de données regroupant des ressources techniques et de gestion, ainsi qu’un historique des actions de maintenance. La fonctionnalité de gestion d'assistance ou helpdesk fournit aux utilisateurs un service leur permettant de signaler des incidents ou de créer des demandes basées sur un actif ou non, ceci par la création d'un ticket d’assistance.
 
@@ -312,14 +312,14 @@ Il va s'agir d'installer un logiciel libre de gestion des services informatiques
 
 #### --- Base de Données de GLPI : MariaDB --- <a name="IIA1"></a>
 
-::: warning
+
 **Ressources web :**
 * [MariaDB via Wikipedia](https://fr.wikipedia.org/wiki/MariaDB)
 * [Infos MariaDB via doc-fedora](https://doc.fedora-fr.org/wiki/Installation_et_configuration_de_MariaDB)
 * [Infos MariaDB](https://www.mariadbtutorial.com/)
 * [Infos MariaDB via docs Ubuntu](https://doc.ubuntu-fr.org/mariadb)
 * [Tuto MariaDB](https://www.geek17.com/fr/content/debian-10-buster-installer-et-configurer-mariadb-107)
-::: 
+
 
 Un système de gestion de base de données (abr. SGBD) est un logiciel système servant à stocker, à manipuler ou gérer, et à partager des données dans une base de données, en garantissant la qualité, la pérennité et la confidentialité des informations, tout en cachant la complexité des opérations.
 Un SGBD (en anglais DBMS pour database management system) permet d'inscrire, de retrouver, de modifier, de trier, de transformer ou d'imprimer les informations de la base de données. Il permet d'effectuer des comptes rendus des informations enregistrées et comporte des mécanismes pour assurer la cohérence des informations, éviter des pertes d'informations dues à des pannes, assurer la confidentialité et permettre son utilisation par d'autres logiciels1. Selon le modèle, le SGBD peut comporter une simple interface graphique jusqu'à des langages de programmation sophistiqués1. 
@@ -358,11 +358,11 @@ Un SGBD (en anglais DBMS pour database management system) permet d'inscrire, de 
 
 Apache est conçu pour prendre en charge de nombreux modules lui donnant des fonctionnalités supplémentaires : interprétation du langage Perl, PHP, Python et Ruby, serveur proxy, Common Gateway Interface, Server Side Includes, réécriture d'URL, négociation de contenu, protocoles de communication additionnels, etc. Néanmoins, il est à noter que l'existence de nombreux modules Apache complexifie la configuration du serveur web. En effet, les bonnes pratiques recommandent de ne charger que les modules utiles : de nombreuses failles de sécurité affectant uniquement les modules d'Apache sont régulièrement découvertes. 
 
-::: warning
+
 **Ressources web :**
 * [Infos Apache via docs Ubuntu](https://doc.ubuntu-fr.org/apache2)
 * [Infos Apache via docs Ubunu2](https://guide.ubuntu-fr.org/server/httpd.html)
-:::
+
 
 > `nano /etc/apache2/sites-available/000-default.conf`<br/>
 -> Sous DocumentRoot : <br/>
@@ -490,13 +490,13 @@ Pour se faire, il va utiliser AWS qui est le [fournisseur de gestion de serveur/
 
 ### B) Configuration d'une clef SSH <a name="IID1bis"></a>
 
-::: warning
+
 **Ressources web :**
 * [Définition de SSH via doc Ubuntu](https://doc.ubuntu-fr.org/ssh)
 * [Informations sur le SSH via Wikipedia](https://fr.wikipedia.org/wiki/Secure_Shell)
 * [Tutoriel Git-scm.com sur la création de clés ssh](https://git-scm.com/book/fr/v2/Git-sur-le-serveur-G%C3%A9n%C3%A9ration-des-cl%C3%A9s-publiques-SSH)
 * [Tutoriel GitHub quant à créer une clef ssh et la mettre sur github](https://tutos.rezel.net/git/ssh-keys/)
-:::
+
 
 1. Nous allons créer une clef SSH via notre machine hôte afin de sécuriser la liaison avec le serveur<br/>
 - On génère une clef publique en ligne de commande<br/>
@@ -539,7 +539,7 @@ Pour se faire, il va utiliser AWS qui est le [fournisseur de gestion de serveur/
 
 ### D) Création d'un certifical ssl pour une connexion en HTTPS <a name="IID3"></a>
 
-::: warning
+
 **Ressources web :**
 * [Définition d'un certificat SSL](https://www.globalsign.com/fr/centre-information-ssl/definition-certificat-ssl)
 * [Letsencrypt, infos pour le HTTPS](https://letsencrypt.org/fr/getting-started/) <br/>
@@ -548,7 +548,7 @@ Pour se faire, il va utiliser AWS qui est le [fournisseur de gestion de serveur/
 * [Cerbot, II](https://howto.wared.fr/ubuntu-certificats-ssl-tls-certbot/) <br/>
 * [Dépôts officiels Github](https://github.com/certbot/certbot) <br/>
 * [Doc Ubuntu pour créer un certificat SSL](https://doc.ubuntu-fr.org/tutoriel/comment_creer_un_certificat_ssl)<br/>
-:::
+
 
 
 Afin de pouvoir passer en SSL et donc de proposer du HTTPS il s'agit de passer par un projet de certificat gratuit pour tout le monde : *cerbot* ; seul bémol, l'enregistrement dure 60 jours et se doit d'être renouvelé régulièrement
@@ -601,7 +601,7 @@ RDelmas_Merlin, Romain Delmas, mdp *romain*
 * AD DS : active directory domain service <br/>
 * Le niveau fonctionnel de la foret : windowsSer 2019 n'est pas un vrai OS, c'est plus le nom marketing de win ser 16 version 2 donc pas de news, on est sur une base de 2016. 2019 c'est plus une maj.  
 
-::: warning
+
 **Ressources web :**
 - [Qu'est-ce qu'un DNS via WIkipedia](https://fr.wikipedia.org/wiki/Domain_Name_System)
 - [Le DNS via le site frameip](https://www.frameip.com/dns/)
@@ -610,7 +610,7 @@ RDelmas_Merlin, Romain Delmas, mdp *romain*
 - [Explication des 5 rôles FSMO via le site it-connect](https://www.it-connect.fr/chapitres/les-cinq-roles-fsmo/) 
 - [Infos Wikipedia sur les TLD](https://fr.wikipedia.org/wiki/Domaine_de_premier_niveau)
 - [Lignes de commandes CMD usuelles](https://www.ionos.fr/digitalguide/serveur/know-how/commande-cmd/)
-:::
+
 
 L'idée sera de créer un WServer qui servira de server entre notre GLPI et les usagers via un AD. Pour commencer il faudra donc monter un WServer propre et ensuite paramétrer l'AD pour gérer notre server GLPI. PLus précisément nous allons monter une machine Serveur qui doit s'occuper des noms de Second niveau ; et à un AD correspond non un serveur mais un nom de domaine au moins. Le premier contrôleur de domaine que nous installerons dans la forêt jouera les cinq rôles de la FSMO.  
 
@@ -644,14 +644,14 @@ Infos paramètres réseau
 
 ### B) INstallation d'un AD <a name="IIIB"></a>
 
-::: warning
+
 **Ressources web :**
 * [Mise en place d'un environnement AD](https://rdr-it.com/mise-en-place-environnement-active-directory/)
 * [Définition d'un AD via wikipedia](https://fr.wikipedia.org/wiki/Active_Directory)
 * [Monter un AD sur WServer2019 via technet365.fr](https://technet365.fr/installation-active-directory-sur-windows-serveur-2019/)
 * [Installation d'un AD via techexpert.tips](https://techexpert.tips/fr/windows-fr/installation-dactive-directory-sur-windows-server/)
 * [Administration simplifiée d'un AD via la doc Microsoft](https://docs.microsoft.com/fr-fr/windows-server/identity/ad-ds/manage/ad-ds-simplified-administration)
-:::
+
 
 Une machine Serveur qui doit s'occuper des noms de Second niveau ; et à un AD correspond non un serveur mais un nom de domaine au moins
 
@@ -803,12 +803,12 @@ Ainsi, le server GLPI qui est hébergé sur notre VM debian résout sa recherche
 
 ### C) Configurer les intitulés <a name="IVC"></a>
 
-::: warning
+
 **Ressources web :**
 * [Configurer les intitulés](https://glpi-project.org/DOC/FR/glpi/config_dropdown.html)
 * [Via le site GLPI](https://glpi-user-documentation.readthedocs.io/fr/latest/modules/configuration/intitules/index.html)
 * [Injection en masse des données dans GLPI](https://neptunet.fr/glpi-data-injection/)
-:::
+
 
 1. On commence par changer l'entité 
 -> Nom : **bortzmeyer** comme entité racine (ou alors en *enfant*)
@@ -827,13 +827,13 @@ Ainsi, le server GLPI qui est hébergé sur notre VM debian résout sa recherche
 
 #### D) Gestion générale de GLPI : plugins <a name="IVD"></a>
 
-::: warning
+
 **Ressources web :**
 * [Gestion générale de GLPI](https://neptunet.fr/glpi/)
 * [Cours OpenClassroom sur FusionInventoy](https://openclassrooms.com/fr/courses/1730516-gerez-votre-parc-informatique-avec-glpi/5994176-installez-le-plugin-et-l-agent-fusioninventory)
 * [Liste des PLugins dispo](https://plugins.glpi-project.org/#/)
 * [Tuto online via Neptunet](https://neptunet.fr/glpi-ad/)
-:::
+
 
 Pour installer un plugin dans GLPI, il suffit de télécharger son archive puis de l'extraire dans le dossier .../glpi/plugins, et de les installer via l'interface de GLPI. Ensuite, dans l'interface GLPI, aller sous Configuration > Plugins cliquez sur Installer puis Activer. À noter qu'un plugin peut disposer de plusieurs versions, chaque version est la plupart du temps spécifique à une version précise de GLPI
 
@@ -929,12 +929,12 @@ On peut ensuite faire un état des lieux de l'ensemble du parc (le gsm est recon
 
 #### F) Gestion générale de GLPI : tickets et création d'un Helpdesk <a name="IVF"></a>
 
-::: warning
+
 **Ressources Web**
 * [OpenClassroom](https://openclassrooms.com/fr/courses/1730486-gerez-vos-incidents-avec-le-referentiel-itil-sur-glpi/6544671-traitez-et-suivez-votre-ticket-dans-glpi)
 * [GLPI-Project](https://glpi-project.org/DOC/FR/glpi/helpdesk_openticket.html)
 * [HelpDesk ticket](https://glpi-project.org/DOC/FR/glpi/helpdesk_ticket.html)
-:::
+
 
 Le module d'assistance de GLPI est conforme au guide de bonnes pratiques ITIL pour la partie Gestion des incidents et gestion des demandes de services : il intègre donc des notions comme l'impact, l'urgence d'un ticket, la matrice de calcul des priorités associées et une normalisation des statuts. Bien que l'outil soit conforme ITIL, il n'y aucune obligation pour suivre ces bonnes pratiques : chacun est libre d'implémenter la gestion des incidents qui correspond le mieux à ses besoins.
 
@@ -1014,11 +1014,11 @@ Ensuite on organise l'assistance à distance.
 
 #### H) Création d'une FAQ <a name="IVH"></a>
 
-::: warning
+
 **Ressources web**
 - [Base de connaissance et FAQ](https://glpi-project.org/fr/base-de-connaissances-et-foire-aux-questions-faq/)
 - [Tools Knowbase via glpi-project](https://glpi-project.org/DOC/FR/glpi/tool_knowbase.html)
-:::
+
 
 La base de connaissances répond à deux objectifs principaux : Le premier est de centraliser des connaissances internes aux différents techniciens. Le second est de mettre à disposition des utilisateurs des informations (FAQ publique) leur permettant de résoudre seuls des problèmes simples.
 
