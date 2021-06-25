@@ -695,7 +695,7 @@ Le script devra avoir l'extension .ps1 c'est-à-dire powershell version 1, qui p
 * Script PS1 : [Script sur cefim](https://campus.cefim.eu/pluginfile.php/54105/mod_resource/content/1/adimport.ps1)
 * Script PS1 simplifié 
 
-```
+```ps1
 $users = import-csv -path "C:\Users\TSSR\Desktop\import.csv" -delimiter ";"
 foreach($user in $users)
 {
