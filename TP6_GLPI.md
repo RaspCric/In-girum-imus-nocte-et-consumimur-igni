@@ -998,13 +998,13 @@ Seuls les éléments de la FAQ publique sont visibles par les utilisateurs de l'
     -> possible de parcourir les différents articles via *Parcourir*
     -> pour ajouter appuyer sur "+"
 
-[Ajout topic FAQ](https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/blob/images/Ajout%20faq.png)
+![Ajout topic FAQ](https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/blob/images/Ajout%20faq.png)
 
 * On vérifie ensuite dans l'accès utilisateur
 
-[FAQ 1](https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/blob/images/faq1.png)
+![FAQ 1](https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/blob/images/faq1.png)
 
-[FAQ 2](https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/blob/images/faq2.png)
+![FAQ 2](https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/blob/images/faq2.png)
 
 
 
