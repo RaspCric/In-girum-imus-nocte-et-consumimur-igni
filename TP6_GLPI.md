@@ -88,14 +88,15 @@ Cette partie permettra en outre de développer des outils afférents à l'admini
     3. [Préparation du GLPI local pour un accès réseau](#IIC)
         1. [Translation NAT](#IIC1)
         2. [Personalisation du GLPI](#IIC2)
-    4. [Mise en place d'un GLPI commun](#IID)
-        1. [Configuration du cloud amazon : AWS](#IID1)
-        2. [Configuration d'une clef SSH](#IID1bis)
-        2. [Configuration d'apache 2](#IID2)
-        3. [Création d'un certifical ssl](#IID3)
-        4. [Installation GLPI sur le serveur cloud](#IID4)
 
-3. [Montage d'un Windows Serveur 2019](#III)
+3. [Mise en place d'un GLPI commun](#IID)
+    1. [Configuration du cloud amazon : AWS](#IID1)
+    2. [Configuration d'une clef SSH](#IID1bis)
+    2. [Configuration d'apache 2](#IID2)
+    3. [Création d'un certifical ssl](#IID3)
+    4. [Installation GLPI sur le serveur cloud](#IID4)
+
+4. [Montage d'un Windows Serveur 2019](#III)
     1. [Préparation d'une baseline WServeur 2019](#IIIA)
     2. [Montage d'Active Directory](#IIIB)
         1. [Installation de l'AD](#IIIB1)
@@ -104,8 +105,8 @@ Cette partie permettra en outre de développer des outils afférents à l'admini
         4. [Mise en place d'une GPO pour autoriser les mdp faibles](#IIIB4)
         5. [Générer les users créés dans l'AD via script shell](#IIIB5)
 
-4. [Mise en lien d’Active Directory et notre GLPI](#IV)
-    1. [Gestion des différents DNS](#IVA)
+5. [Configuration et utilisation de GLPI](#IV)
+    1. [Mise en lien d’Active Directory et notre GLPI via DNS](#IVA)
         1. [Modifications du DNS sur le WServer](#IVA1)
         2. [Modifications du DNS de réponse sur le serveur GLPI via VM Debian](#IVA2)
     2. [Import des users via un annuaire LDAP sur l'interface GLPI](#IVB)
@@ -116,7 +117,7 @@ Cette partie permettra en outre de développer des outils afférents à l'admini
     7. [Gestion générale de GLPI : tickets et création d'un Helpdesk dans le cloud](#IVG)
     8. [Création d'une FAQ](#IVH)
 
-5. [Annexe : lexique](#lexique)
+6. [Annexe : lexique](#lexique)
 
 
 
@@ -458,13 +459,13 @@ Via une interface web en pingant l'adresse IP publique on tombe sur l'IP local d
 > `mv nom1 nom2`<br/>
 -> Pour renommer le fichier image téléchargé 
 
-### D) Mise en place d'un GLPI commun <a name="IID"></a>
+## III. Mise en place d'un GLPI commun <a name="IID"></a>
 
 Suite à la création d'un GLPI en local, mise en place d'un GLPI commun via le cloud pour un accès partagé. Thomas va l'installer via le compte cloud du CEFIM. 
 Pour se faire, il va utiliser AWS qui est le [fournisseur de gestion de serveur/hébergement d'amazon](https://aws.amazon.com/fr/).
 
 
-#### --- Configuration du cloud Amazon AWS --- <a name="IID1"></a>
+### A) Configuration du cloud Amazon AWS <a name="IID1"></a>
 
 1. Dans les champs de navigation d'AWS aller sur l'EC2 qui gère l'ensemnle des serveurs dans le cloud.<br/>
 -> Utilisation du WIzard (AMI, type d'instance, configuration instance, stockage, balises ROLE/GLPI, groupe de sécurité pour config les ports/protocoles d'accès, lancement de l'instance, nouvelle paire de clefs pour pouvoir être prise en main à distance via ssh)
@@ -474,7 +475,7 @@ Pour se faire, il va utiliser AWS qui est le [fournisseur de gestion de serveur/
 - Reconfigurer la date si besoin<br/>
 > `dkpg-reconfigure tzdata`
 
-#### --- Configuration d'une clef SSH --- <a name="IID1bis"></a>
+### B) Configuration d'une clef SSH <a name="IID1bis"></a>
 
 **Ressources web :**
 * [Définition de SSH via doc Ubuntu](https://doc.ubuntu-fr.org/ssh)
@@ -489,7 +490,7 @@ Pour se faire, il va utiliser AWS qui est le [fournisseur de gestion de serveur/
 2. On envoie notre clef ssh au serveur GLPI créé dans le Cloud<br/>
 > `ssh -i nomdelaclef.pem admin@support.cefim.ninja`
 
-#### --- Configuration d'apache 2 --- <a name="IID2"></a>
+### C) Configuration d'apache 2  <a name="IID2"></a>
 
 > `cd /etc/apache2`<br/>
 -> On se met dans le dossier Apache du serveur GLPI online
@@ -521,7 +522,7 @@ Pour se faire, il va utiliser AWS qui est le [fournisseur de gestion de serveur/
 > `nano index.html`<br/>
 -> On créé un nouvel user, on se déplace dans son arborescence, on passe en Admin pour créer un nouveau dossier www dedans et à l'intérieur duquel on créé une page html bidon mais qui servira pour la suite via son affichage simple
 
-#### --- Création d'un certifical ssl --- <a name="IID3"></a>
+### D) Création d'un certifical ssl pour une connexion en HTTPS <a name="IID3"></a>
 
 * [Définition d'un certificat SSL](https://www.globalsign.com/fr/centre-information-ssl/definition-certificat-ssl)
 * [Letsencrypt, infos pour le HTTPS](https://letsencrypt.org/fr/getting-started/) <br/>
@@ -547,7 +548,7 @@ Afin de pouvoir passer en SSL et donc de proposer du HTTPS il s'agit de passer p
 On finit par obtenir un certificat et il est alors possible de se rendre sur la page [support.cefim.ninja](https://support.cefim.ninja/) via HTTPS.
 
 
-#### --- Installation GLPI sur le serveur cloud --- <a name="IID4"></a>
+### E) Installation GLPI sur le serveur cloud <a name="IID4"></a>
 
 L'idée consistera au téléchargement et à l'installation de GLPI, à la supression de toutes les infos web par défaut afin de créer un USER particulier qui servira d'espace de création dudit GLPI. Là encore, il s'agira de suppmer toutes les infos hmtl de base afin de partir sur une base neutre et sans config de base.
 
@@ -574,7 +575,7 @@ RDelmas_Merlin, Romain Delmas, mdp *romain*
 
 ---
 
-## III. Montage d'un Windows Serveur 2019 et mise en lien avec GLPI <a name="III"></a>
+## IV. Montage d'un Windows Serveur 2019 et mise en lien avec GLPI <a name="III"></a>
 
 * Au moins un domaine controler, mono domaine, mono serveur.  <br/>
 * tld : top level domain ( comme . fr; 1er niveau)  <br/>
@@ -724,11 +725,11 @@ foreach($user in $users)
 Pour le mappage des infos csv/ad : [SIte de microsoft qui donne le nom des catégories afin de permettre de rajouter des variables dans le script pour l'import d'infos supplémentaires](https://docs.microsoft.com/fr-fr/system-center/scsm/ad-ds-attribs?view=sc-sm-2019)
 
 
-## IV. Importer des utilisateurs d’Active Directory dans GLPI <a name="IV"></a>
+## V. Configuration et utilisation de GLPI <a name="IV"></a>
 
 Dans le chemin `/windows/system32/drivers/etc/` il y a un fichier *services* où toutes les infos ports sont dedans + fichier *hosts* où il est possible de filtrer le réseau via ip/nomdns (sert de DNS local)
 
-### A) Gestion des différents DNS <a name="IVA"></a>
+### A) Mise en lien d’Active Directory et de notre GLPI via DNS <a name="IVA"></a>
 
 **Ressources en-ligne**
 - [DNS et Windows Server](https://openclassrooms.com/fr/courses/2356306-prenez-en-main-windows-server/5835581-installez-un-serveur-dns)
@@ -736,7 +737,7 @@ Dans le chemin `/windows/system32/drivers/etc/` il y a un fichier *services* où
 
 Il s'agire de faire en sorte que les machines puissent avoir accès via une résolution des noms de domaines aux différents server et vice-versa. Ainsi il faudra que nous permettions aux différents services DNS d'être raccord entre les noms de domaines et les IP que nous souhaitons liées.
 
-#### --- Mise sous tutelle du serveur via protocole DNS --- <a name="IVA1"></a>
+#### --- Mise sous tutelle du Wserveur via protocole DNS --- <a name="IVA1"></a>
 
 Ajouter un support glpi dans WServer2019 + une redirection DNS car il faut mettre notre WServeur sous tutelle du DNS. POur se faire nous allons ajouter un support glpi dans WServer2019 ainsi qu'une redirection DNS
 
@@ -960,7 +961,7 @@ Il est possible de voir l'ensemble des tickets dans l'interface GLPI.
     -> rdelmas (admin)
     -> glagaffe (noobuser)
 
-![Tableau récapitulatif](https://github.com/RaspCric/TSSR_Formation/blob/images/Exercice%20de%20groupe%20sur%20le%20cloud.jpg)
+![Tableau récapitulatif](https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/blob/images/tableau_sujets_glpi.png)
 
 - On créé les tickets en fonction des problèmes rencontrés
 - On attribue ensuite les tickets aux personnes dédiées
@@ -983,10 +984,29 @@ Ensuite on organise l'assistance à distance.
 ![L'usager confrme la réparation](https://github.com/RaspCric/TSSR_Formation/blob/images/tik2b.png)
 
 
-
 #### H) Création d'une FAQ <a name="IVH"></a>
 
-* GLPI / Base de connaissance
+**Ressources web**
+- [Base de connaissance et FAQ](https://glpi-project.org/fr/base-de-connaissances-et-foire-aux-questions-faq/)
+- [Tools Knowbase via glpi-project](https://glpi-project.org/DOC/FR/glpi/tool_knowbase.html)
+
+La base de connaissances répond à deux objectifs principaux : Le premier est de centraliser des connaissances internes aux différents techniciens. Le second est de mettre à disposition des utilisateurs des informations (FAQ publique) leur permettant de résoudre seuls des problèmes simples.
+
+Seuls les éléments de la FAQ publique sont visibles par les utilisateurs de l'interface simplifiée. Les éléments qui ne sont pas définis comme faisant partie de la FAQ publique sont visibles uniquement au sein de la console centrale par des techniciens par exemple. 
+
+* GLPI / Outils / Base de connaissance
+    -> possible de parcourir les différents articles via *Parcourir*
+    -> pour ajouter appuyer sur "+"
+
+[Ajout topic FAQ](https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/blob/images/Ajout%20faq.png)
+
+* On vérifie ensuite dans l'accès utilisateur
+
+[FAQ 1](https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/blob/images/faq1.png)
+
+[FAQ 2](https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/blob/images/faq2.png)
+
+
 
 
 
