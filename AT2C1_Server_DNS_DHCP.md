@@ -1210,7 +1210,7 @@ Solution Snooping
 ![*](https://raw.githubusercontent.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/images/pt_dhcp_config_dhcp.jpg)
 
 - Il faut entrer dans les routers via CLI et indiquer le chemin du server du DHCP
-- Rappel des [commandes CLI](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/fundamentals/configuration/15mt/fundamentals-15-mt-book/cf-cli-basics.html), ou, plus général de [comment fonctionne CLI](https://cisco.goffinet.org/ccna/cisco-ios-cli/methode-cisco-ios-cli/)
+- Rappel des [commandes CLI](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/fundamentals/configuration/15mt/fundamentals-15-mt-book/cf-cli-basics.html), ou, plus général de [comment fonctionne CLI](https://cisco.goffinet.org/ccna/cisco-ios-cli/methode-cisco-ios-cli/) ; possible aussi de jeter un coup d'oeil sur le .md de JB qui fait un [tableau recapitulatif des commandes](https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/blob/b84299446078006ffaebe38b8375679e4ebadd87/AT2_C1_Cisco%20Cheat%20Sheet%20CLS%20IOS.pdf)
 > ```enable```<br/>
 > ```conf t```<br/>
 - là on entre dans les pattes exterieures du router : 
