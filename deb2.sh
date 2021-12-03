@@ -1,5 +1,14 @@
 #!/bin/bash
 
+##################
+##################
+##################
+## Softs Debian ##
+##################
+##################
+##################
+
+
 #####################
 ## Baseline Debian ##
 #####################
@@ -29,14 +38,13 @@ apt install -y -f --quiet curl lynx
 # Outils sécurité (proxy, ssl, fw)
 echo -e "Security tools :"
 apt install -y -f --quiet e2guardian fail2ban gnupg2 iptables openssl squid ssh ufw
+snap install -y -f core
+snap install -y -f --classic certbot
+ln -s /snap/bin/certbot /usr/bin/certbot
 
 # Outils transfert de fichiers
 echo -e "FTPS tools :"
 apt install -y -f --quiet samba vsftpd
-cd /etc
-wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/vsftpd.conf.new
-cd /etc/samba/
-wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/samba.conf.new
 
 # Librairies de dépendances
 echo -e "Librairies :"
@@ -48,7 +56,7 @@ apt update -f && apt upgrade -f
 apt --fix-broken install
 
 #####################
-## Config serveurs ##
+## Outils serveurs ##
 #####################
 
 # Outils Web Serveur (lamps)
@@ -60,25 +68,8 @@ dpkg -i webmin_1.982_all.deb
 apt update
 apt install -y -f --quiet webmin
 rm -f webmin_1.982_all.deb
-# Apache2
-cd /etc/apache2/sites-available
-systemctl enable apache2
-a2enmod ssl rewrite headers
-a2ensite default-ssl
-touch /etc/apache2/sites-available/site.conf
-cat /etc/apache2/sites-available/000-default.conf > site.conf
-cat /etc/apache2/sites-available/default-ssl.conf >> site.conf
-a2dissite 000-default.conf defaul-ssl.conf
-a2ensite site.conf
-rm -f /etc/apache2/sites-available/000-default.conf
-rm -f /etc/apache2/sites-available/default-ssl.conf
-wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/bookstack.conf
-wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/wordpress.conf
-wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/mediawiki.conf
-wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/nextcloud.conf
-systemctl restart apache2
 
-# Outils serveurs DNS DHCP
+# Outils serveurs DNS 
 echo -e "DNS tools :"
 apt install -y -f --quiet bind9
 
@@ -86,7 +77,7 @@ apt install -y -f --quiet bind9
 echo -e "DNS tools :"
 apt install -y -f --quiet isc-dhcp-client #isc-dhcp-server
 
-# Outil configuration de serveurs esclaves
+# Outils configuration de serveurs esclaves
 echo -e "Puppet :"
 cd /root
 wget https://apt.puppet.com/puppet7-release-focal.deb
@@ -95,9 +86,9 @@ apt update
 apt install -y -f --quiet puppet
 rm -f puppet7-release-focal.deb
 
-#####################
-## Monitoring rezo ##
-#####################
+#######################
+## Outils monitoring ##
+#######################
 
 # Cacti
 echo -e "Cacti install :"
@@ -149,6 +140,71 @@ rm -f docker-ce-cli_20.10.11~3-0~debian-bullseye_amd64.deb
 rm -f docker-ce-rootless-extras_20.10.11~3-0~debian-bullseye_amd64.deb
 rm -f docker-ce_20.10.11~3-0~debian-bullseye_amd64.deb
 rm -f docker-scan-plugin_0.9.0~debian-bullseye_amd64.deb
+
+####################
+####################
+####################
+## Configurations ##
+####################
+####################
+####################
+
+# FTP & FTPS
+cd /etc
+wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/vsftpd.conf.new
+
+cd /etc/samba/
+wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/samba.conf.new
+
+# Apache2
+cd /etc/apache2/sites-available
+systemctl enable apache2
+a2enmod ssl rewrite headers
+a2ensite default-ssl
+touch /etc/apache2/sites-available/site.conf
+cat /etc/apache2/sites-available/000-default.conf > site.conf
+cat /etc/apache2/sites-available/default-ssl.conf >> site.conf
+a2dissite 000-default.conf defaul-ssl.conf
+a2ensite site.conf
+rm -f /etc/apache2/sites-available/000-default.conf
+rm -f /etc/apache2/sites-available/default-ssl.conf
+wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/bookstack.conf
+wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/wordpress.conf
+wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/mediawiki.conf
+wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/nextcloud.conf
+systemctl restart apache2
+
+# FW: iptables
+cd /root
+iptables -t filter -F
+iptables -t filter -X
+
+iptables -t filter -X
+iptables -t filter -P FORWARD DROP
+iptables -t filter -P OUTPUT DROP
+
+iptables -t filter -A INPUT -p icmp -j ACCEPT
+iptables -t filter -A INPUT -p tcp -m tcp --dport 21 -j ACCEPT
+iptables -t filter -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+iptables -t filter -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+iptables -t filter -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+iptables -t filter -A INPUT -p tcp -m tcp --dport 10000 -j ACCEPT
+iptables -t filter -A INPUT -p tcp -m tcp --dport 990 -j ACCEPT
+iptables -t filter -A INPUT -p tcp -m tcp --dport 137 -j ACCEPT
+iptables -t filter -A INPUT -p tcp -m tcp --dport 139 -j ACCEPT
+iptables -t filter -A INPUT -p tcp -m tcp --dport 445 -j ACCEPT
+iptables -t filter -A INPUT -p tcp -m tcp --dport 65000:65500 -j ACCEPT
+
+iptables -t filter -A INPUT -p udp -m udp --dport 137 -j ACCEPT
+iptables -t filter -A INPUT -p udp -m udp --dport 138 -j ACCEPT
+iptables -t filter -A INPUT -p udp -m udp --dport 445 -j ACCEPT
+
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -t filter -A INPUT -i lo -j ACCEPT
+iptables -t filter -A INPUT -j DROP
+
+iptables-save > /etc/fw.conf
+cat "pre-up iptables-restore </etc/fw.conf" > /etc/network/interfaces
 
 ##############
 ## Finition ##
