@@ -57,9 +57,9 @@ ssl_sslv3=NO
 
 # Certificat et clef
 rsa_cert_file=/etc/vsftpd_cert.pem
-rsa_private_key_file=/etc/apache2/vsftpd_key.pem
+rsa_private_key_file=/etc/vsftpd_key.pem
 
 # Mode passif activé
 pasv_enable=yes
-pasv_min_port=40000
-pasv_max_port=60000
+pasv_min_port=65000
+pasv_max_port=65500
