@@ -8,7 +8,7 @@ apt update -y && apt upgrade -y
 
 # Gestionnaires de paquets, de dépendances & de versions
 echo -e "OS tools :"
-apt install -y -f --quiet aptitude composer dpkg git ivy rpm snapd yum4
+apt install -y -f --quiet aptitude composer debconf debconf-utils dpkg git ivy rpm snapd yum4
 
 # Outils langage de programmation
 echo -e "Prog tools :"
@@ -33,10 +33,15 @@ apt install -y -f --quiet e2guardian fail2ban gnupg2 iptables openssl squid ssh 
 # Outils transfert de fichiers
 echo -e "FTPS tools :"
 apt install -y -f --quiet samba vsftpd
+cd /etc
+wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/vsftpd.conf.new
+cd /etc/samba/
+wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/samba.conf.new
 
 # Librairies de dépendances
 echo -e "Librairies :"
-apt install -y -f libnet-ssleay-perl libauthen-pam-perl libio-pty-perl libodbc1 libopenipmi0 libslirp0 libssh-4 slirp4netns
+cd /root
+apt install -y -f libnet-ssleay-perl libauthen-pam-perl libio-pty-perl libodbc1 libopenipmi0 libssh-4
 
 # On lance un petit refresh et on corrige s'il y a des erreurs
 apt update -f && apt upgrade -f
@@ -123,6 +128,7 @@ rm -f zabbix-release_5.4-1+debian11_all.deb
 # Docker
 echo -e "Docker install :"
 cd /root
+apt install -y -f --quiet libslirp0 slirp4netns
 wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/amd64/containerd.io_1.4.12-1_amd64.deb
 wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/amd64/docker-ce-cli_20.10.11~3-0~debian-bullseye_amd64.deb
 wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/amd64/docker-ce-rootless-extras_20.10.11~3-0~debian-bullseye_amd64.deb
