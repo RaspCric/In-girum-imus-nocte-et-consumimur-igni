@@ -14,7 +14,6 @@ for var in 10 9 8 7 6 5 4 3 2 1 0
     do
         echo "$var"
     done
-exit 0
 
 #####################
 ## Baseline Debian ##
@@ -170,7 +169,6 @@ for var in 10 9 8 7 6 5 4 3 2 1 0
     do
         echo "$var"
     done
-exit 0
 
 # FTP & FTPS
 echo "On commence par le FTPS :"
