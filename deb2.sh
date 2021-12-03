@@ -8,6 +8,13 @@
 ##################
 ##################
 
+echo "On commence par installer les softs essentiels :"
+
+secs=$((1 * 10))
+while [ $secs -gt 0 ]; do
+   echo -ne "$secs\033[0K\r"
+   sleep 1
+   : $((secs--))
 
 #####################
 ## Baseline Debian ##
@@ -117,29 +124,29 @@ rm -f zabbix-release_5.4-1+debian11_all.deb
 ################
 
 # Docker
-echo -e "Docker install :"
-cd /root
-apt install -y -f --quiet libslirp0 slirp4netns
-wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/amd64/containerd.io_1.4.12-1_amd64.deb
-wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/amd64/docker-ce-cli_20.10.11~3-0~debian-bullseye_amd64.deb
-wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/amd64/docker-ce-rootless-extras_20.10.11~3-0~debian-bullseye_amd64.deb
-wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/amd64/docker-ce_20.10.11~3-0~debian-bullseye_amd64.deb
-wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/amd64/docker-scan-plugin_0.9.0~debian-bullseye_amd64.deb
-dpkg -i containerd.io_1.4.12-1_amd64.deb
-dpkg -i docker-ce-cli_20.10.11~3-0~debian-bullseye_amd64.deb
-dpkg -i docker-ce-rootless-extras_20.10.11~3-0~debian-bullseye_amd64.deb
-dpkg -i docker-ce_20.10.11~3-0~debian-bullseye_amd64.deb
-dpkg -i docker-scan-plugin_0.9.0~debian-bullseye_amd64.deb
-apt update
-apt install -y -f --quiet containerd.io docker-ce docker-ce-cli docker-ce-rootless-extras docker-scan-plugin dbus-user-session slirp4netns
-apt --fix-broken -y install
-sudo docker run hello-world
-cd /root
-rm -f containerd.io_1.4.12-1_amd64.deb
-rm -f docker-ce-cli_20.10.11~3-0~debian-bullseye_amd64.deb
-rm -f docker-ce-rootless-extras_20.10.11~3-0~debian-bullseye_amd64.deb
-rm -f docker-ce_20.10.11~3-0~debian-bullseye_amd64.deb
-rm -f docker-scan-plugin_0.9.0~debian-bullseye_amd64.deb
+# echo -e "Docker install :"
+# cd /root
+# apt install -y -f --quiet libslirp0 slirp4netns
+# wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/amd64/containerd.io_1.4.12-1_amd64.deb
+# wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/amd64/docker-ce-cli_20.10.11~3-0~debian-bullseye_amd64.deb
+# wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/amd64/docker-ce-rootless-extras_20.10.11~3-0~debian-bullseye_amd64.deb
+# wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/amd64/docker-ce_20.10.11~3-0~debian-bullseye_amd64.deb
+# wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/amd64/docker-scan-plugin_0.9.0~debian-bullseye_amd64.deb
+# dpkg -i containerd.io_1.4.12-1_amd64.deb
+# dpkg -i docker-ce-cli_20.10.11~3-0~debian-bullseye_amd64.deb
+# dpkg -i docker-ce-rootless-extras_20.10.11~3-0~debian-bullseye_amd64.deb
+# dpkg -i docker-ce_20.10.11~3-0~debian-bullseye_amd64.deb
+# dpkg -i docker-scan-plugin_0.9.0~debian-bullseye_amd64.deb
+# apt update
+# apt install -y -f --quiet containerd.io docker-ce docker-ce-cli docker-ce-rootless-extras docker-scan-plugin dbus-user-session slirp4netns
+# apt --fix-broken -y install
+# sudo docker run hello-world
+# cd /root
+# rm -f containerd.io_1.4.12-1_amd64.deb
+# rm -f docker-ce-cli_20.10.11~3-0~debian-bullseye_amd64.deb
+# rm -f docker-ce-rootless-extras_20.10.11~3-0~debian-bullseye_amd64.deb
+# rm -f docker-ce_20.10.11~3-0~debian-bullseye_amd64.deb
+# rm -f docker-scan-plugin_0.9.0~debian-bullseye_amd64.deb
 
 ####################
 ####################
@@ -149,23 +156,43 @@ rm -f docker-scan-plugin_0.9.0~debian-bullseye_amd64.deb
 ####################
 ####################
 
+echo "Minatenant un peu de configuration :"
+
+secs=$((1 * 10))
+while [ $secs -gt 0 ]; do
+   echo -ne "$secs\033[0K\r"
+   sleep 1
+   : $((secs--))
+
 # FTP & FTPS
+echo "On commence par le FTPS :"
 cd /etc
+openssl req -x509 -nodes -days 365 -newkey rsa:4096 -out /etc/vsftpd_cert.pem -keyout /etc/vsftpd_key.pem
+mv vsftpd.conf vsftpd.conf.bak
 wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/vsftpd.conf.new
+mv vsftpd.conf.new vsftpd.conf
+service vsftpd restart
 
 cd /etc/samba/
+mv smb.conf smb.conf.bak
 wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/samba.conf.new
+mv samba.conf.new smb.conf
+service nmbd restart
+service smbd restart
 
 # Apache2
+echo "Puis une config de base pour Apache2 en attendant let's encrypt :"
 cd /etc/apache2/sites-available
 systemctl enable apache2
 a2enmod ssl rewrite headers
 a2ensite default-ssl
+openssl req $@ -new -x509 -days 3560 -nodes -out /etc/apache2/apache2.pem -keyout /etc/apache2/apache2.pem
 touch /etc/apache2/sites-available/site.conf
-cat /etc/apache2/sites-available/000-default.conf > site.conf
-cat /etc/apache2/sites-available/default-ssl.conf >> site.conf
+cat /etc/apache2/sites-available/000-default.conf > bakup.conf
+cat /etc/apache2/sites-available/default-ssl.conf >> bakup.conf
 a2dissite 000-default.conf defaul-ssl.conf
-a2ensite site.conf
+wget htps://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/apache2.conf
+a2ensite apache2.conf
 rm -f /etc/apache2/sites-available/000-default.conf
 rm -f /etc/apache2/sites-available/default-ssl.conf
 wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/bookstack.conf
@@ -204,7 +231,8 @@ iptables -t filter -A INPUT -i lo -j ACCEPT
 iptables -t filter -A INPUT -j DROP
 
 iptables-save > /etc/fw.conf
-cat "pre-up iptables-restore </etc/fw.conf" > /etc/network/interfaces
+
+echo "pre-up iptables-restore </etc/fw.conf" >> /etc/network/interfaces
 
 ##############
 ## Finition ##
