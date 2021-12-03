@@ -1,12 +1,22 @@
 #!/bin/bash
 
-## Baseline Debien
+#####################
+## Baseline Debian ##
+#####################
 
 apt update -y && apt upgrade -y
 
-# Utilitaires système
+# Gestionnaires de paquets, de dépendances & de versions
 echo -e "OS tools :"
-apt install -y -f --quiet aptitude composer debarchiver dpkg git perl reprepro screen snapd sudo tar tzdata unzip vim wget yum4 zip 
+apt install -y -f --quiet aptitude composer dpkg git ivy rpm snapd yum4
+
+# Outils langage de programmation
+echo -e "Prog tools :"
+apt install -y -f --quiet perl python3 python3-pip 
+
+# Utilitaires système
+echo -e "OS utilitaries :"
+apt install -y -f --quiet apparmor debarchiver reprepro screen sudo tar tzdata unzip vim wget zip 
 
 # Outils réseaux
 echo -e "Network tools :"
@@ -16,18 +26,28 @@ apt install -y -f --quiet asp bwm-ng doscan dnsutils dsniff etherwake ethstats e
 echo -e "http tools :"
 apt install -y -f --quiet curl lynx
 
-# Outils sécurité
+# Outils sécurité (proxy, ssl, fw)
 echo -e "Security tools :"
 apt install -y -f --quiet e2guardian fail2ban gnupg2 iptables openssl squid ssh ufw
 
-# Outils FTP
+# Outils transfert de fichiers
 echo -e "FTPS tools :"
 apt install -y -f --quiet samba vsftpd
 
-# Outils LAMPS
+#####################
+## Config serveurs ##
+#####################
+
+# Outils Web Serveur (lamps)
 echo -e "LAMPS tools :"
 apt install -y -f --quiet apache2 libapache2-mod-php mariadb-client mariadb-server php php-{apcu,bcmath,bz2,cas,cli,curl,dev,gd,imagick,intl,json,ldap,mysql,mbstring,memcache,snmp,soap,sqlite3,ssh2,tcpdf,twig,xml,zip} phpmyadmin rrdtool snmp
-# Préparation configuration Apache
+cd /root
+wget https://prdownloads.sourceforge.net/webadmin/webmin_1.982_all.deb
+dpkg -i webmin_1.982_all.deb
+apt update
+apt install -y -f --quiet webmin
+rm -f webmin_1.982_all.deb
+# Apache2
 cd /etc/apache2/sites-available
 systemctl enable apache2
 a2enmod ssl rewrite headers
@@ -40,32 +60,28 @@ a2ensite site.conf
 rm -f /etc/apache2/sites-available/000-default.conf
 rm -f /etc/apache2/sites-available/default-ssl.conf
 systemctl restart apache2
-cd /etc/apache2/sites-available
-wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/bookstack.conf
-wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/mediawiki.conf
-wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/nextcloud.conf
-wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/wordpress.conf
-# Outil GNU
-cd /root
-wget https://prdownloads.sourceforge.net/webadmin/webmin_1.982_all.deb
-dpkg -i webmin_1.982_all.deb
-apt update
-apt install -y -f --quiet webmin
 
-# Outils serveurs
-echo -e "Server tools :"
-apt install -y -f --quiet bind9 isc-dhcp-client #isc-dhcp-server
-# Puppet
+# Outils serveurs DNS DHCP
+echo -e "DNS tools :"
+apt install -y -f --quiet bind9 
+
+# Outils serveurs DHCP
+echo -e "DNS tools :"
+apt install -y -f --quiet isc-dhcp-client #isc-dhcp-server
+
+# Outil configuration de serveurs esclaves 
+echo -e "Puppet :"
 cd /root
 wget https://apt.puppet.com/puppet7-release-focal.deb
 dpkg -i puppet7-release-focal.deb
 apt update
+apt install puppet7
+rm -f puppet7-release-focal.deb
 
-# Outils dev
-echo -e "Dev tools :"
-apt install -y -f --quiet python3 python3-pip 
+#####################
+## Monitoring rezo ##
+#####################
 
-# Monitoring réseau
 # Cacti
 echo -e "Cacti install :"
 cd /root
@@ -87,7 +103,10 @@ apt update
 apt install -y -f --quiet zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent 
 rm -f zabbix-release_5.4-1+debian11_all.deb
 
-# Containers
+################
+## Containers ##
+################
+
 # Docker
 echo -e "Docker install :"
 cd /root
