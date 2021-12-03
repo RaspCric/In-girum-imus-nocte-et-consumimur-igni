@@ -187,14 +187,14 @@ systemctl enable apache2
 a2enmod ssl rewrite headers
 a2ensite default-ssl
 openssl req $@ -new -x509 -days 3560 -nodes -out /etc/apache2/apache2.pem -keyout /etc/apache2/apache2.pem
-touch /etc/apache2/sites-available/site.conf
-cat /etc/apache2/sites-available/000-default.conf > bakup.conf
-cat /etc/apache2/sites-available/default-ssl.conf >> bakup.conf
+touch /etc/apache2/sites-available/backup.conf
+cat /etc/apache2/sites-available/000-default.conf > backup.conf
+cat /etc/apache2/sites-available/default-ssl.conf >> backup.conf
 a2dissite 000-default.conf defaul-ssl.conf
-wget htps://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/apache2.conf
-a2ensite apache2.conf
 rm -f /etc/apache2/sites-available/000-default.conf
 rm -f /etc/apache2/sites-available/default-ssl.conf
+wget htps://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/apache2.conf
+a2ensite apache2.conf
 wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/bookstack.conf
 wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/wordpress.conf
 wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/mediawiki.conf
