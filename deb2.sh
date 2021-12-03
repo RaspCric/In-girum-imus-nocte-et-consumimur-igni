@@ -9,12 +9,11 @@
 ##################
 
 echo "On commence par installer les softs essentiels :"
-
-secs=$((1 * 10))
-while [ $secs -gt 0 ]; do
-   echo -ne "$secs\033[0K\r"
-   sleep 1
-   : $((secs--))
+for i seq 1 1 10 
+do
+echo "."
+echo "Attente de 10sc"
+done
 
 #####################
 ## Baseline Debian ##
@@ -45,8 +44,8 @@ apt install -y -f --quiet curl lynx
 # Outils sécurité (proxy, ssl, fw)
 echo -e "Security tools :"
 apt install -y -f --quiet e2guardian fail2ban gnupg2 iptables openssl squid ssh ufw
-snap install -y -f core
-snap install -y -f --classic certbot
+snap install core
+snap install --classic certbot
 ln -s /snap/bin/certbot /usr/bin/certbot
 
 # Outils transfert de fichiers
@@ -148,6 +147,14 @@ rm -f zabbix-release_5.4-1+debian11_all.deb
 # rm -f docker-ce_20.10.11~3-0~debian-bullseye_amd64.deb
 # rm -f docker-scan-plugin_0.9.0~debian-bullseye_amd64.deb
 
+#########################
+## Paquets recommandés ##
+#########################
+
+# Paquets recommandés
+echo "On installe les paquets recommandés :"
+apt install -y -f --quiet apt-xapian-index aptitude-doc-en aptitude-doc debtags fossil mercurial subversion php-zip rpm-i18n default-jre dbus-user-session pinentry-gnome3 tor git-daemon-run git-daemon-sysvinit git-doc git-el git-email git-gui gitk gitweb git-cvs git-mediawiki git-svn parcimonie xloadimage xloadimage imagemagick eog scdaemon default-jre java2-runtime ivy-doc libbcpg-java libbcprov-java libjsch-agent-proxy-java libjsch-java lrzip libasound2-plugins alsa-utils cups-common libcwidget-dev debian-keyring gcc c-compiler binutils bzr liblcms2-utils pcscd xapian-tools libnss-mdns fonts-dejavu-extra fonts-ipafont-gothic fonts-ipafont-mincho fonts-wqy-microhei fonts-wqy-zenhei fonts-indic ed diffutils-doc php-symfony-event-dispatcher php-symfony-lock php-symfony-service-implementation php-pear pinentry-doc python-dbus-doc python3-dbus-dbg python3-dnf-doc python3-hawkey-docs python-libcomps-doc alien elfutils rpmlint rpm2html zenity kdialog sqlite3-doc zip deltarpm binutils-doc cpp-doc gcc-10-locales debian-keyring g++-multilib g++-10-multilib gcc-10-doc gcc-multilib autoconf automake libtool flex bison gdb gcc-doc gcc-10-multilib apache2 lighttpd httpd glibc-doc libgd-tools libstdc++-10-doc make-doc python-setuptools-doc devscripts exim4-doc-html exim4-doc-info eximon4 spf-tools-perl swaks dns-root-data gpm mailutils-mh mailutils-doc inoticoming lzip byobu screenie iselect ctags vim-doc vim-scripts liblinear-tools liblinear-dev lm-sensors snmp-mibs-downloader ncat ndiff zenmap heimdal-clients python3-markdown python3-dnspython libnss-winbind libpam-winbind apache2-doc apache2-suexec-pristine  apache2-suexec-custom autoconf-archive gnu-standards autoconf-doc dh-make fonts-noto fonts-freefont-otf fonts-freefont-ttf fonts-texgyre gawk-doc gettext-doc libasprintf-dev libgettextpo-dev ghostscript-x libfftw3-bin libfftw3-dev libdata-dump-perl libipc-sharedcache-perl libjs-requirejs libjs-jquery-ui-docs libtool-doc libmagickcore-6.q16-6-extra libssl-doc gfortran fortran95-compiler gcj-jdk libwww-perl m4-doc mariadb-test netcat-openbsd memcached php-dbase php-libsodium php-mcrypt php-gmp php-symfony-proxy-manager-bridge php-twig-doc dh-php php-recode php-gd2 php-pragmarx-google2fa-qrcode php-samyoul-u2f-php-server libmail-box-perl poppler-utils fonts-japanese-mincho fonts-ipafont-mincho fonts-japanese-gothic fonts-ipafont-gothic fonts-arphic-ukai fonts-arphic-uming fonts-nanum librrds-perl snmptrapd ttf-dejavu-core php-mcrypt bind-doc resolvconf python-ply-doc
+
 ####################
 ####################
 ####################
@@ -157,12 +164,11 @@ rm -f zabbix-release_5.4-1+debian11_all.deb
 ####################
 
 echo "Minatenant un peu de configuration :"
-
-secs=$((1 * 10))
-while [ $secs -gt 0 ]; do
-   echo -ne "$secs\033[0K\r"
-   sleep 1
-   : $((secs--))
+for i seq 1 1 10 
+do
+echo "."
+echo "Attente de 10sc"
+done
 
 # FTP & FTPS
 echo "On commence par le FTPS :"
@@ -193,7 +199,7 @@ cat /etc/apache2/sites-available/default-ssl.conf >> backup.conf
 a2dissite 000-default.conf defaul-ssl.conf
 rm -f /etc/apache2/sites-available/000-default.conf
 rm -f /etc/apache2/sites-available/default-ssl.conf
-wget htps://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/apache2.conf
+wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/apache2.conf
 a2ensite apache2.conf
 wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/bookstack.conf
 wget https://github.com/RaspCric/In-girum-imus-nocte-et-consumimur-igni/raw/lamps/wordpress.conf
