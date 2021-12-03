@@ -1,0 +1,18 @@
+[global]
+workgroup = 
+netbios name = 
+comment = 
+interfaces = ens33
+encrypt passwords = true
+security = user
+smb passwd file = /usr/bin/smbpasswd
+passdb backend = tdbsam
+obey pam restrictions = yes
+
+[www]
+path = 
+valid users = user
+valid group =
+writeable = Yes
+create mask = 777
+directory mask = 777
