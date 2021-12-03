@@ -19,6 +19,7 @@ done
 ## Baseline Debian ##
 #####################
 
+# On commence par mettre à jour les paquets
 apt update -y && apt upgrade -y
 
 # Gestionnaires de paquets, de dépendances & de versions
