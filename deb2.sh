@@ -9,17 +9,17 @@
 ##################
 
 echo "On commence par installer les softs essentiels :"
-for i seq 1 1 10 
-do
-echo "."
-echo "Attente de 10sc"
-done
+
+for var in 10 9 8 7 6 5 4 3 2 1 0
+    do
+        echo "$var"
+    done
+exit 0
 
 #####################
 ## Baseline Debian ##
 #####################
 
-# On commence par mettre à jour les paquets
 apt update -y && apt upgrade -y
 
 # Gestionnaires de paquets, de dépendances & de versions
@@ -76,7 +76,7 @@ apt update
 apt install -y -f --quiet webmin
 rm -f webmin_1.982_all.deb
 
-# Outils serveurs DNS 
+# Outils serveurs DNS
 echo -e "DNS tools :"
 apt install -y -f --quiet bind9
 
@@ -165,11 +165,12 @@ apt install -y -f --quiet apt-xapian-index aptitude-doc-en aptitude-doc debtags 
 ####################
 
 echo "Minatenant un peu de configuration :"
-for i seq 1 1 10 
-do
-echo "."
-echo "Attente de 10sc"
-done
+
+for var in 10 9 8 7 6 5 4 3 2 1 0
+    do
+        echo "$var"
+    done
+exit 0
 
 # FTP & FTPS
 echo "On commence par le FTPS :"
