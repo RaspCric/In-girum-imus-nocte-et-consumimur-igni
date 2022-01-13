@@ -8,3 +8,4 @@
 0.0.0.0 game.brawlstarsgame.com
 0.0.0.0 supercell.net
 0.0.0.0 supercell.com
+0.0.0.0 https://supercell.com/en/
