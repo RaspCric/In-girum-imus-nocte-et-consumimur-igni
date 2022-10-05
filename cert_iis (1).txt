@@ -1,0 +1,10 @@
+$Server = "intranet.netwatch.lan"
+$DateToday = Get-Date
+$DateIn3Y = $DateToday.AddYears(3)
+New-SelfSignedCertificate -DnsName $Server -CertStoreLocation "cert:\LocalMachine\My" -FriendlyName $Server -NotAfter $DateIn3Y
+$CertThumbprint = (Get-ChildItem -path cert:\LocalMachine\My | Where{ $_.Subject -match $Server }).Thumbprint
+$CertPwd = ConvertTo-SecureString -String "MyCertByIIS" -Force –AsPlainText
+Export-PfxCertificate -Cert cert:\LocalMachine\My\$CertThumbprint -FilePath C:\Export\MyCert.pfx -Password $CertPwd
+Export-Certificate -Cert Cert:\LocalMachine\My\$CertThumbprint -FilePath C:\MyCert.cer
+Import-Certificate -FilePath C:\MyCert.cer -CertStoreLocation Cert:\LocalMachine\My\
+Import-PfxCertificate -FilePath C:\MyCert.pfx -Password $CertPwd -CertStoreLocation Cert:\LocalMachine\Root
